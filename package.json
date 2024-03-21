@@ -1,5 +1,5 @@
 {
-  "name": "my-react-app",
+  "name": "table",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.15.14",
+    "@mui/x-date-pickers": "^6.19.8",
+    "material-react-table": "^2.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
