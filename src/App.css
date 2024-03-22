@@ -6,6 +6,17 @@
   background-color: bisque;
 }
 
+.css-1llu0od{
+  justify-content: center !important;
+}
+.css-qpxlqp{
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: unset !important;
+}
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
