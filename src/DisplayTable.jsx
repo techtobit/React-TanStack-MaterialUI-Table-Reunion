@@ -19,7 +19,10 @@ import {
 
 import {
   Box,
+  FormControlLabel,
+  FormGroup,
   IconButton,
+  Modal,
   Stack,
   Table,
   TableBody,
@@ -33,6 +36,8 @@ import {
 // import { AddBox, ArrowDownward } from "@material-ui/icons";
 
 import AddBox from "@mui/icons-material/AddBox";
+import Switch from '@mui/material/Switch';
+import ViewCozy from "@mui/icons-material/ViewCozy";
 import TableHook from './TableHook';
 import { values } from 'lodash';
 
@@ -49,13 +54,12 @@ const DisplayTable = () => {
     columns,
     data: items || true,
     initialState: { showGlobalFilter: true },
-
     enableColumnActions: false,
     enableFullScreenToggle: false,
-
-    enableColumnOrdering: true,
-
-
+    enableColumnOrdering: false,
+    positionGlobalFilter: 'left',
+    positionPagination: 'top',
+    enableGlobalFilterModes: true,
 
     muiPaginationProps: {
       color: 'primary',
@@ -64,16 +68,14 @@ const DisplayTable = () => {
       variant: 'outlined',
     },
     paginationDisplayMode: 'pages',
-    enableGlobalFilterModes: true,
+
     renderBottomToolbarCustomActions: ({ table }) => (
-      <Button
-        variant="contained"
-        color="lightblue"
-        //extract all selected rows from the table instance and do something with them
-        onClick={() => handleDownloadRows(table.getSelectedRowModel().rows)}
-      >
-        Download Selected Rows
-      </Button>
+      <>
+      </>
+    ),
+    renderToolbarInternalActions: ({ table }) => (
+      <>
+      </>
     ),
 
   });
@@ -84,19 +86,41 @@ const DisplayTable = () => {
 
   return (
     <Stack sx={{ m: '1rem 0' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      {table.getAllLeafColumns().map((column) => {
+        return (
+          <Stack key={column.id} >
+            <FormGroup >
+            
+              <FormControlLabel
+                direction="row-reverse"
+                spacing={10}
+                control={
+                  <Switch
+                    checked={column.getIsVisible()}
+                    onChange={column.getToggleVisibilityHandler()}
+                    aria-label="Column ON/OFF"
+                  />
+                }
+                
+              />
+            </FormGroup>
+          </Stack>
+        )
+      })}
+      <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: '8px', backgroundColor: 'white', padding: '10px' }}>
         <MRT_GlobalFilterTextField table={table} />
         <MRT_ToggleFiltersButton table={table} />
-        <MRT_ShowHideColumnsButton table={table} />
-        
 
+        <MRT_ShowHideColumnsButton table={table} />
         <Tooltip title="Print">
-          <IconButton onClick={''}>
-            <AddBox/>
+          <IconButton onClick={``}>
+            <AddBox />
           </IconButton>
         </Tooltip>
+
       </Box>
-      <MaterialReactTable icons={tableIcon}  table={table} />
+      <MRT_TableContainer icons={tableIcon} table={table} />
+
     </Stack>
   );
 
