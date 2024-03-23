@@ -15,7 +15,7 @@ const TableHook = () => {
       {
         accessorKey: 'name', 
         header: 'Name',
-        size: 100,
+        size: 150,
       },
       {
         accessorKey: 'category', 
@@ -30,12 +30,12 @@ const TableHook = () => {
       {
         accessorKey: 'createdAt',
         header: 'Created At',
-        size: 200,
+        size: 100,
       },
       {
         accessorKey: 'updatedAt',
         header: 'Updated At',
-        size: 200,
+        size: 100,
       },
       {
         accessorKey: 'price',

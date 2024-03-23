@@ -1,10 +1,12 @@
 import './App.css'
-import Example from './Table'
+import DisplayTable from './DisplayTable'
+
 function App() {
 
   return (
     <>
-    <Example/>
+    {/* <Example/> */}
+    <DisplayTable/>
     </>
   )
 }
