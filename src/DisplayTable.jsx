@@ -1,54 +1,49 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import {
-  MRT_EditRowModal,
   MRT_GlobalFilterTextField,
   MRT_ShowHideColumnsButton,
-  MRT_ShowHideColumnsMenuItems,
-  MRT_Table,
-  MRT_TableBodyCellValue,
   MRT_TableContainer,
-  MRT_TableHeadCellColumnActionsButton,
-  MRT_TablePagination,
-  MRT_TablePaper,
-  MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
-  MRT_ToolbarAlertBanner,
-  MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
 
 import {
   Box,
-  FormControlLabel,
-  FormGroup,
+  Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Modal,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Tooltip,
-  Typography,
 } from '@mui/material';
-// import { AddBox, ArrowDownward } from "@material-ui/icons";
 
-import AddBox from "@mui/icons-material/AddBox";
+
 import Switch from '@mui/material/Switch';
-import ViewCozy from "@mui/icons-material/ViewCozy";
+import Visibility from '@mui/icons-material/Visibility'
 import TableHook from './TableHook';
-import { values } from 'lodash';
+import BasicModal from './Components/BasicModal';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import AnchorTemporaryDrawer from './Components/Drawer';
 
 
 const DisplayTable = () => {
 
   const { columns, items, error, isLoading } = TableHook();
+  const [openModal, setOpenModal] = useState(false);
+  
 
-  const tableIcon = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  const handleOpenModal=()=> {
+    setOpenModal(true);
   }
+
+  const handleCloseModal=()=> {
+    setOpenModal(false);
+    console.log('CloseModal', openModal);
+  }
+
+  console.log('Table State', openModal);
 
   const table = useMaterialReactTable({
     columns,
@@ -85,43 +80,53 @@ const DisplayTable = () => {
   }
 
   return (
-    <Stack sx={{ m: '1rem 0' }}>
+    <>
       {table.getAllLeafColumns().map((column) => {
         return (
-          <Stack key={column.id} >
-            <FormGroup >
-            
-              <FormControlLabel
-                direction="row-reverse"
-                spacing={10}
-                control={
-                  <Switch
-                    checked={column.getIsVisible()}
-                    onChange={column.getToggleVisibilityHandler()}
-                    aria-label="Column ON/OFF"
-                  />
-                }
-                
-              />
-            </FormGroup>
+          <Stack key={column.id}
+          >
+            <List
+              sx={{
+                border: '1px solid grey',
+                margin: '2px',
+                width: 300
+              }}
+            >
+              <ListItem >
+                <ListItemText primary={column.id} />
+                <Switch
+                  edge='end'
+                  checked={column.getIsVisible()}
+                  onChange={column.getToggleVisibilityHandler()}
+                  aria-label="Column ON/OFF"
+                />
+              </ListItem>
+            </List>
           </Stack>
         )
       })}
-      <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: '8px', backgroundColor: 'white', padding: '10px' }}>
-        <MRT_GlobalFilterTextField table={table} />
-        <MRT_ToggleFiltersButton table={table} />
 
-        <MRT_ShowHideColumnsButton table={table} />
-        <Tooltip title="Print">
-          <IconButton onClick={``}>
-            <AddBox />
-          </IconButton>
-        </Tooltip>
+      <Stack sx={{ m: '1rem 0' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: '8px', backgroundColor: 'white', padding: '10px' }}>
+          <MRT_GlobalFilterTextField table={table} />
+          <MRT_ToggleFiltersButton table={table} />
 
-      </Box>
-      <MRT_TableContainer icons={tableIcon} table={table} />
+          <MRT_ShowHideColumnsButton table={table} />
+          <Tooltip title="Hide/Show Columns">
+          <IconButton onClick={handleOpenModal} >
+              <Visibility />
+            </IconButton>
+          </Tooltip>
+            
 
-    </Stack>
+        </Box>
+
+        <MRT_TableContainer  table={table} />
+
+      </Stack>
+      {/* {openModal && <BasicModal isOpen={openModal} onClose={() => setOpenModal(false)} />} */}
+      <AnchorTemporaryDrawer isOpen={openModal}  onClose={handleCloseModal} />
+    </>
   );
 
 
