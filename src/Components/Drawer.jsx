@@ -10,11 +10,16 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { DialogTitle, IconButton } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import ColumnHideShow from './ColumnHideShow';
 
 
 
-const AnchorTemporaryDrawer = ({ isOpen, onClose }) => {
+
+
+const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => {
   const [open, setOpen] = useState(isOpen);
+
+  console.log("type", btnType, 'data', drawerContent);
 
   useEffect(() => {
     setOpen(isOpen);
@@ -25,8 +30,13 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose }) => {
       sx={{ width: 350 }}
       role="presentation"
     >
-      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-        Modal title
+      <Box 
+      sx={{margin:'2px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}
+      >
+      <DialogTitle variant="subtitle1" id="customized-dialog-title"
+      // sx={}
+      >
+        {btnType == 'showHideColsBtn' && <>Show/Hide Columns</>}
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -35,25 +45,19 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose }) => {
           onClose();
         }}
         sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
+          width:'45px',
+          height: '45px'
         }}
       >
         <CloseRoundedIcon />
       </IconButton>
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      </Box>
+      <List
+      sx={{
+        margin: '10px'
+      }}
+      >
+      {btnType == 'showHideColsBtn' && <ColumnHideShow table={drawerContent}/>}
       </List>
     </Box>
   );
