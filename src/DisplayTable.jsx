@@ -23,7 +23,6 @@ import {
 import Switch from '@mui/material/Switch';
 import Visibility from '@mui/icons-material/Visibility'
 import TableHook from './TableHook';
-import BasicModal from './Components/BasicModal';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import AnchorTemporaryDrawer from './Components/Drawer';
@@ -34,13 +33,17 @@ const DisplayTable = () => {
 
   // const { columns, items, error, isLoading } = TableHook();
   const {table,isLoading } = useMaterialTableHook();
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const [btnType, setBtnType] = useState()
 
   const handleShowHideCols=()=> {
     setBtnType('showHideColsBtn')
     setOpenModal(true);
     
+  }
+  const handlesortColsBtn = () => {
+    setBtnType('sortColsBtn')
+    setOpenModal(true);
   }
   const handleFliterCols = () => {
     setBtnType('filterColsBtn')
@@ -69,7 +72,7 @@ const DisplayTable = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Hide/Show Columns">
-          <IconButton onClick={handleFliterCols} >
+          <IconButton onClick={handlesortColsBtn} >
               <SwapVertRoundedIcon />
             </IconButton>
           </Tooltip>

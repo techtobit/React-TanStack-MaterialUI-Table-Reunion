@@ -8,13 +8,15 @@ export default function useMaterialTableHook() {
   const table = useMaterialReactTable({
     columns,
     data: items || true,
-    initialState: { showGlobalFilter: true },
     enableColumnActions: false,
     enableFullScreenToggle: false,
     enableColumnOrdering: false,
     positionGlobalFilter: 'left',
-    positionPagination: 'top',
-    enableGlobalFilterModes: true,
+    initialState: {
+      showGlobalFilter: true, 
+      enableGlobalFilterModes: true,
+      sorting:[]
+    },
 
     muiPaginationProps: {
       color: 'primary',
@@ -26,6 +28,6 @@ export default function useMaterialTableHook() {
 
   });
   return (
-    {table,  error, isLoading}
+    { table, error, isLoading }
   )
 }

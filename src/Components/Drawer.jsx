@@ -11,15 +11,13 @@ import MailIcon from '@mui/icons-material/Mail';
 import { DialogTitle, IconButton } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColumnHideShow from './ColumnHideShow';
-
-
+import SortColumn from './SortColumn';
 
 
 
 const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => {
   const [open, setOpen] = useState(isOpen);
 
-  console.log("type", btnType, 'data', drawerContent);
 
   useEffect(() => {
     setOpen(isOpen);
@@ -36,7 +34,9 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => 
       <DialogTitle variant="subtitle1" id="customized-dialog-title"
       // sx={}
       >
-        {btnType == 'showHideColsBtn' && <>Show/Hide Columns</>}
+        {btnType == 'showHideColsBtn' && <span>Show/Hide Columns</span>}
+        {btnType == 'sortColsBtn' && <span>Sorting Options</span> }
+
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -57,7 +57,13 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => 
         margin: '10px'
       }}
       >
-      {btnType == 'showHideColsBtn' && <ColumnHideShow table={drawerContent}/>}
+      {btnType === 'showHideColsBtn' && <ColumnHideShow table={drawerContent}/>}
+      {/* {btnType === 'sortColsBtn' && <SortColumn  table={drawerContent}/>} */}
+      {/* {btnType == 'sortColsBtn' && <SortColumn/>} */}
+      {/* <ColumnHideShow table={drawerContent}/> */}
+      <SortColumn  table={drawerContent}/>
+      
+      
       </List>
     </Box>
   );
