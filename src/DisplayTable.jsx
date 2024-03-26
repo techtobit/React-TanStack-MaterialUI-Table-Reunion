@@ -27,6 +27,8 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import AnchorTemporaryDrawer from './Components/Drawer';
 import useMaterialTableHook from './utility/useMaterialTableHook';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import LayersIcon from '@mui/icons-material/Layers';
 
 
 const DisplayTable = () => {
@@ -47,6 +49,10 @@ const DisplayTable = () => {
   }
   const handleFliterCols = () => {
     setBtnType('filterColsBtn')
+    setOpenModal(true);
+  }
+  const handleCreateGroups = () => {
+    setBtnType('createGroupsBtn')
     setOpenModal(true);
   }
 
@@ -74,6 +80,16 @@ const DisplayTable = () => {
           <Tooltip title="Hide/Show Columns">
           <IconButton onClick={handlesortColsBtn} >
               <SwapVertRoundedIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Filter Columns">
+          <IconButton onClick={handleFliterCols} >
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Create Groups">
+          <IconButton onClick={handleCreateGroups} >
+              <LayersIcon />
             </IconButton>
           </Tooltip>
             

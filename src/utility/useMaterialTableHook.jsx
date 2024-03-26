@@ -12,10 +12,13 @@ export default function useMaterialTableHook() {
     enableFullScreenToggle: false,
     enableColumnOrdering: false,
     positionGlobalFilter: 'left',
+    enableGrouping: true,
     initialState: {
       showGlobalFilter: true, 
       enableGlobalFilterModes: true,
-      sorting:[]
+      sorting:[],
+      grouping: ['category'], 
+      expanded: true,
     },
 
     muiPaginationProps: {

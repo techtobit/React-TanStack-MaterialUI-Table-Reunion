@@ -12,6 +12,7 @@ import { DialogTitle, IconButton } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColumnHideShow from './ColumnHideShow';
 import SortColumn from './SortColumn';
+import CreateGroups from './CreateGroups';
 
 
 
@@ -36,6 +37,8 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => 
       >
         {btnType == 'showHideColsBtn' && <span>Show/Hide Columns</span>}
         {btnType == 'sortColsBtn' && <span>Sorting Options</span> }
+        {btnType == 'filterColsBtn' && <span>Filter</span> }
+        {btnType == 'createGroupsBtn' && <span>Create Groups</span> }
 
       </DialogTitle>
       <IconButton
@@ -58,10 +61,9 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => 
       }}
       >
       {btnType === 'showHideColsBtn' && <ColumnHideShow table={drawerContent}/>}
-      {/* {btnType === 'sortColsBtn' && <SortColumn  table={drawerContent}/>} */}
-      {/* {btnType == 'sortColsBtn' && <SortColumn/>} */}
-      {/* <ColumnHideShow table={drawerContent}/> */}
-      <SortColumn  table={drawerContent}/>
+      {btnType === 'sortColsBtn' && <SortColumn  table={drawerContent}/>}
+      {btnType === 'filterColsBtn' && <SortColumn  table={drawerContent}/>}
+      <CreateGroups  table={drawerContent}/>
       
       
       </List>
