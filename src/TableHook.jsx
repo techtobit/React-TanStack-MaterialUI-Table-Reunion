@@ -24,7 +24,7 @@ const TableHook = () => {
       },
       {
         accessorKey: 'subcategory', 
-        header: 'subcategory',
+        header: 'Subcategory',
         size: 100,
       },
       {

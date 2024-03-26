@@ -17,7 +17,7 @@ export default function useMaterialTableHook() {
       showGlobalFilter: true, 
       enableGlobalFilterModes: true,
       sorting:[],
-      grouping: ['category'], 
+      grouping: ['subcategory'], 
       expanded: true,
     },
 
