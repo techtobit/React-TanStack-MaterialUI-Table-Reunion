@@ -1,7 +1,7 @@
 
 import { MRT_ExpandAllButton, MRT_ExpandButton, useMaterialReactTable } from 'material-react-table';
 import React, { useEffect, useRef, useState } from 'react'
-import TableHook from '../TableHook';
+import TableHook from '../Hook/TableHook';
 
 export default function useMaterialTableHook() {
   const { columns, items, error, isLoading } = TableHook();
@@ -20,7 +20,7 @@ export default function useMaterialTableHook() {
   const table = useMaterialReactTable({
     columns,
     data: items || true,
-    enableColumnActions: true,
+    enableColumnActions: false,
     enableFullScreenToggle: false,
     enableColumnOrdering: false,
     groupedColumnMode,
@@ -32,6 +32,7 @@ export default function useMaterialTableHook() {
       sorting:['category'],
       grouping:colHeaderGroup,
       expanded: true,
+      pagination: { pageSize: 25, pageIndex: 2 },
     },
 
     muiPaginationProps: {

@@ -18,8 +18,8 @@ import {
 
 import Visibility from '@mui/icons-material/Visibility'
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
-import AnchorTemporaryDrawer from './Components/Drawer';
-import useMaterialTableHook from './utility/useMaterialTableHook';
+import AnchorTemporaryDrawer from '../Components/Drawer';
+import useMaterialTableHook from './useMaterialTableHook';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import LayersIcon from '@mui/icons-material/Layers';
 
