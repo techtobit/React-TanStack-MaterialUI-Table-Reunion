@@ -1,23 +1,36 @@
 
-import { useMaterialReactTable } from 'material-react-table';
-import React from 'react'
+import { MRT_ExpandAllButton, MRT_ExpandButton, useMaterialReactTable } from 'material-react-table';
+import React, { useEffect, useRef, useState } from 'react'
 import TableHook from '../TableHook';
 
 export default function useMaterialTableHook() {
   const { columns, items, error, isLoading } = TableHook();
+  const [groupedColumnMode, setGroupedColumnMode] = useState('reorder');
+  const [colHeaderGroup, setColHeaderGroup] = useState([])
+  const [colGroup, setColGroup] = useState([])
+
+  console.log('TH', colHeaderGroup);
+
+  useEffect(() => {
+    if (colHeaderGroup) {
+      setColGroup(colHeaderGroup);
+    }
+  }, [colHeaderGroup]);
+
   const table = useMaterialReactTable({
     columns,
     data: items || true,
-    enableColumnActions: false,
+    enableColumnActions: true,
     enableFullScreenToggle: false,
     enableColumnOrdering: false,
-    positionGlobalFilter: 'left',
-    enableGrouping: true,
+    groupedColumnMode,
+    enableGrouping:true,
+    enableColumnDragging: false,
     initialState: {
       showGlobalFilter: true, 
       enableGlobalFilterModes: true,
-      sorting:[],
-      grouping: ['subcategory'], 
+      sorting:['category'],
+      grouping:colHeaderGroup,
       expanded: true,
     },
 
@@ -31,6 +44,6 @@ export default function useMaterialTableHook() {
 
   });
   return (
-    { table, error, isLoading }
+    { table, error, isLoading, setColHeaderGroup}
   )
 }

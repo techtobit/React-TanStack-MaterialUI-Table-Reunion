@@ -4,6 +4,7 @@ import {
   MRT_ShowHideColumnsButton,
   MRT_TableContainer,
   MRT_ToggleFiltersButton,
+  getAllLeafColumnDefs,
   useMaterialReactTable,
 } from 'material-react-table';
 
@@ -11,19 +12,11 @@ import {
   Box,
   Drawer,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Modal,
   Stack,
   Tooltip,
 } from '@mui/material';
 
-
-import Switch from '@mui/material/Switch';
 import Visibility from '@mui/icons-material/Visibility'
-import TableHook from './TableHook';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import AnchorTemporaryDrawer from './Components/Drawer';
 import useMaterialTableHook from './utility/useMaterialTableHook';
@@ -33,9 +26,8 @@ import LayersIcon from '@mui/icons-material/Layers';
 
 const DisplayTable = () => {
 
-  // const { columns, items, error, isLoading } = TableHook();
-  const {table,isLoading } = useMaterialTableHook();
-  const [openModal, setOpenModal] = useState(true);
+  const {table,isLoading, setColHeaderGroup } = useMaterialTableHook();
+  const [openModal, setOpenModal] = useState(false);
   const [btnType, setBtnType] = useState()
 
   const handleShowHideCols=()=> {
@@ -60,11 +52,9 @@ const DisplayTable = () => {
     setOpenModal(false);
   }
 
-  console.log('Table State', openModal);
-
 
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <div sx={{ color: '#000000', height: '100vh' }}>Loading</div>;
   }
 
   return (
@@ -97,7 +87,7 @@ const DisplayTable = () => {
         <MRT_TableContainer  table={table} />
       </Stack>
 
-        <AnchorTemporaryDrawer isOpen={openModal}  onClose={handleCloseModal} drawerContent={table} btnType={btnType}/>
+        <AnchorTemporaryDrawer isOpen={openModal}  onClose={handleCloseModal} drawerContent={table} btnType={btnType} setColHeaderGroup={setColHeaderGroup}/>
       
     </>
   );

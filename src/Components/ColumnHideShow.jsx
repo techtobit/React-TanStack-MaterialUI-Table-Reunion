@@ -39,8 +39,6 @@ const ColumnHideShow = ({ table }) => {
                 <ListItemText primary={column.id} />
                 <Switch
                   edge='end'
-                  // checked={!pendingHiddenColumns.includes(column.id)}
-                  // onChange={() => handleToggleColumnVisibility(column.id)}
                   checked={column.getIsVisible()}
                   onChange={column.getToggleVisibilityHandler()}
                   aria-label="Column ON/OFF"

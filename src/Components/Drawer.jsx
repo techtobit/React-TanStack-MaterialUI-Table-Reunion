@@ -2,12 +2,6 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { DialogTitle, IconButton } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColumnHideShow from './ColumnHideShow';
@@ -16,7 +10,7 @@ import CreateGroups from './CreateGroups';
 
 
 
-const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => {
+const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType, setColHeaderGroup }) => {
   const [open, setOpen] = useState(isOpen);
 
 
@@ -62,8 +56,9 @@ const AnchorTemporaryDrawer = ({ isOpen, onClose,  drawerContent, btnType }) => 
       >
       {btnType === 'showHideColsBtn' && <ColumnHideShow table={drawerContent}/>}
       {btnType === 'sortColsBtn' && <SortColumn  table={drawerContent}/>}
-      {btnType === 'filterColsBtn' && <SortColumn  table={drawerContent}/>}
-      <CreateGroups  table={drawerContent}/>
+      {btnType === 'filterColsBtn' && <SortColumn  table={drawerContent} />}
+      {btnType === 'createGroupsBtn' && <CreateGroups  table={drawerContent} setColHeaderGroup={setColHeaderGroup} />}
+      
       
       
       </List>
